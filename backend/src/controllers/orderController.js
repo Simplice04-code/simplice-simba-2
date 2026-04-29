@@ -5,6 +5,7 @@ const {
   validateBranchStock,
   branchDepositAmount
 } = require('../services/branchOps');
+const { sendOrderConfirmationEmail } = require('../config/email');
 
 const ORDER_STATUSES = ['pending', 'pending_deposit', 'confirmed', 'assigned', 'preparing', 'ready_for_pickup', 'picked_up', 'on_the_way', 'delivered', 'cancelled'];
 
@@ -101,6 +102,12 @@ exports.createOrder = (req, res) => {
   const orderItemsList = db.prepare(`
     SELECT oi.*, p.name, p.image_url FROM order_items oi JOIN products p ON oi.product_id = p.id WHERE oi.order_id = ?
   `).all(orderId);
+
+  // Send order confirmation email (non-blocking)
+  const user = db.prepare('SELECT email, name FROM users WHERE id = ?').get(req.user.id);
+  if (user) {
+    sendOrderConfirmationEmail(user.email, user.name, { ...order, items: orderItemsList });
+  }
 
   res.status(201).json({
     success: true,
