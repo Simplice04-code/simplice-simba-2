@@ -2,6 +2,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const crypto = require('crypto');
 const { db } = require('../config/database');
+const { sendWelcomeEmail, sendPasswordResetEmail } = require('../config/email');
 
 const JWT_SECRET = process.env.JWT_SECRET || 'simba_supermarket_secret_key_2024';
 
@@ -48,6 +49,9 @@ exports.register = (req, res) => {
   const user = getSafeUserById(result.lastInsertRowid);
   const token = generateToken(user);
 
+  // Send welcome email (non-blocking)
+  sendWelcomeEmail(user.email, user.name);
+
   res.status(201).json({ success: true, message: 'Account created successfully.', token, user });
 };
 
@@ -92,6 +96,12 @@ exports.googleLogin = (req, res) => {
 
   const safeUser = getSafeUserById(user.id);
   const token = generateToken(safeUser);
+
+  // Send welcome email for new Google users
+  if (!user) {
+    sendWelcomeEmail(safeUser.email, safeUser.name);
+  }
+
   res.json({ success: true, message: 'Signed in with Google.', token, user: safeUser });
 };
 
@@ -112,20 +122,15 @@ exports.requestPasswordReset = (req, res) => {
   db.prepare('INSERT INTO password_reset_tokens (user_id, token, expires_at) VALUES (?, ?, ?)').run(user.id, token, expiresAt);
 
   const resetLink = buildResetLink(token);
-  const mockEmail = {
-    provider: 'MockResendAPI',
-    to: user.email,
-    subject: 'Reset your Simba password',
-    preview: `Hi ${user.name}, open the reset link to continue.`,
-    reset_link: resetLink
-  };
+
+  // Send real password reset email (non-blocking)
+  sendPasswordResetEmail(user.email, token);
 
   res.json({
     success: true,
-    message: 'Password reset link generated. In demo mode, the mock email preview is returned below.',
+    message: 'Password reset email sent.',
     reset_token: token,
-    reset_link: resetLink,
-    email_preview: mockEmail
+    reset_link: resetLink
   });
 };
 
