@@ -21,6 +21,7 @@ function resolveApiBase() {
 
 const API_BASE = resolveApiBase();
 let useStaticFallback = !window.SIMBA_API_BASE && (
+  window.location.protocol === 'file:' ||
   window.location.protocol === 'https:' ||
   (window.location.protocol === 'http:' && window.location.port !== '5000')
 );
@@ -70,6 +71,10 @@ const Api = {
   },
 
   async loadStaticData(file) {
+    if (window.SIMBA_STATIC_DATA?.[file]) {
+      return window.SIMBA_STATIC_DATA[file];
+    }
+
     const paths = [
       `data/${file}.json`,
       `../frontend/data/${file}.json`,
