@@ -221,8 +221,6 @@ function getProductImageSrc(product) {
   }
   return imageUrl;
 }
-  return imageUrl;
-}
 
 function getProductPlaceholderSrc(product = {}) {
   const name = String(product.name || 'Simba Product');
