@@ -414,19 +414,21 @@ input, select, textarea { font-family: inherit; }
   background: var(--surface-2);
   position: relative;
   overflow: hidden;
+  min-height: 80px;
 }
 .value-prop::before {
   content: '';
   position: absolute;
   inset: 0;
-  opacity: 0.12;
+  opacity: 0.18;
   z-index: 0;
   background-size: cover;
   background-position: center;
+  display: block;
 }
-.value-prop:nth-child(1)::before { background-image: url('../assets/food.jpg'); }
-.value-prop:nth-child(2)::before { background-image: url('../assets/alcoholic.jpg'); }
-.value-prop:nth-child(3)::before { background-image: url('../assets/delivery.jpg'); }
+.value-prop:nth-child(1)::before { background-image: url('assets/food.jpg'); }
+.value-prop:nth-child(2)::before { background-image: url('assets/alcoholic.jpg'); }
+.value-prop:nth-child(3)::before { background-image: url('assets/delivery.jpg'); }
 .value-prop > * { position: relative; z-index: 1; }
 .value-icon { font-size: 1.8rem; }
 .value-title { font-size: 0.95rem; font-weight: 700; color: var(--text); }
