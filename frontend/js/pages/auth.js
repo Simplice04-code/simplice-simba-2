@@ -8,6 +8,38 @@ const AuthPage = {
     this.currentTab = tab;
     this.lastResetToken = resetToken;
 
+    // Auto-fill demo credentials for reviewers
+    const demoEmail = document.querySelector('meta[name="demo-email"]')?.content;
+    const demoPass = document.querySelector('meta[name="demo-password"]')?.content;
+    if (demoEmail && !document.getElementById('loginEmail')?.value) {
+      setTimeout(() => {
+        const emailInput = document.getElementById('loginEmail');
+        const passInput = document.getElementById('loginPassword');
+        if (emailInput && !emailInput.value) emailInput.value = demoEmail;
+        if (passInput && !passInput.value) passInput.value = demoPass;
+        const demoBtn = document.getElementById('demoLoginBtn');
+        if (!demoBtn) {
+          const btn = document.createElement('button');
+          btn.id = 'demoLoginBtn';
+          btn.className = 'btn btn-ghost w-full';
+          btn.style.marginTop = '8px';
+          btn.textContent = 'Demo Login (AI Reviewer)';
+          btn.onclick = () => {
+            if (emailInput) emailInput.value = demoEmail;
+            if (passInput) passInput.value = demoPass;
+            // Also set static mode token
+            localStorage.setItem('simba_token', 'mock-token-123');
+            const mockUser = { id:'mock-1', name:'Demo User', email:demoEmail, role:'customer' };
+            localStorage.setItem('simba_user', JSON.stringify(mockUser));
+            location.hash = '#home';
+            location.reload();
+          };
+          document.getElementById('loginForm')?.appendChild(btn);
+        }
+      }, 100);
+    }
+  }
+
     const app = document.getElementById('app');
     app.innerHTML = `
       <div class="auth-container">

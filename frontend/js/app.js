@@ -36,10 +36,11 @@ const App = {
   },
 
   showStaticModeIndicator() {
+    if (document.getElementById('staticModeIndicator')) return;
     const indicator = document.createElement('div');
     indicator.id = 'staticModeIndicator';
     indicator.style.cssText = 'position:fixed;top:0;left:0;right:0;background:#f59e0b;color:#000;padding:8px 16px;text-align:center;font-size:13px;z-index:9999;box-shadow:0 2px 4px rgba(0,0,0,0.1);';
-    indicator.innerHTML = 'Demo mode: running from static files. Login and cart are saved in this browser. <a href="#" onclick="location.reload()" style="text-decoration:underline;margin-left:8px;">Reload</a>';
+    indicator.innerHTML = `⚠️ ${I18n.t('staticMode')} <a href="#" onclick="location.reload()" style="text-decoration:underline;margin-left:8px;">${I18n.t('reload')}</a>`;
     document.body.prepend(indicator);
   },
 

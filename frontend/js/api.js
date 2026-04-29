@@ -204,17 +204,25 @@ const Api = {
       return { success: true, data: ['Gasabo', 'Nyarugenge', 'Kicukiro', 'Nyanza'] };
     }
 
-    // Auth endpoints - simulate success with mock token.
+  // Auth endpoints - simulate success with mock token.
     if (endpoint === '/auth/register' && method === 'POST') {
       const mockUser = {
         id: 'mock-user-1',
         name: body.name || 'Demo User',
         email: body.email,
         phone: body.phone || '+250788000000',
-        district: body.district || '',
-        sector: body.sector || ''
+        role: 'customer'
       };
       Api.setToken('mock-token-123');
+      // Store for static persistence
+      localStorage.setItem('simba_user', JSON.stringify(mockUser));
+      return { success: true, token: 'mock-token-123', user: mockUser };
+    }
+
+    if (endpoint === '/auth/login' && method === 'POST') {
+      const mockUser = { id: 'mock-user-1', name: 'Demo User', email: body.email || 'demo@simba.rw', phone: '+250788000000', role: 'customer' };
+      Api.setToken('mock-token-123');
+      localStorage.setItem('simba_user', JSON.stringify(mockUser));
       return { success: true, token: 'mock-token-123', user: mockUser };
     }
 
