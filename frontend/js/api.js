@@ -20,7 +20,11 @@ function resolveApiBase() {
 }
 
 const API_BASE = resolveApiBase();
-let useStaticFallback = false;
+let useStaticFallback = !window.SIMBA_API_BASE && (
+  window.location.protocol === 'https:' ||
+  (window.location.protocol === 'http:' && window.location.port !== '5000')
+);
+const STATIC_CART_KEY = 'simba_static_cart';
 
 const Api = {
   token: localStorage.getItem('simba_token'),
@@ -65,9 +69,28 @@ const Api = {
     return { ok: false, status: 0, data: { message } };
   },
 
+  async loadStaticData(file) {
+    const paths = [
+      `data/${file}.json`,
+      `../frontend/data/${file}.json`,
+      `/frontend/data/${file}.json`,
+      `/data/${file}.json`
+    ];
+
+    for (const path of paths) {
+      try {
+        const res = await fetch(path);
+        if (res.ok) return await res.json();
+      } catch {
+        // Try the next path.
+      }
+    }
+    return null;
+  },
+
   async resolveStaticData(endpoint, method, body) {
     if (endpoint === '/products/conversational-search' && method === 'POST') {
-      const data = await loadStaticData('products');
+      const data = await Api.loadStaticData('products');
       const query = String(body?.query || '').toLowerCase();
       const products = (data?.data || [])
         .map((product) => ({
@@ -93,7 +116,7 @@ const Api = {
 
     // Categories - app expects { categories: [...] }
     if (endpoint === '/products/categories' && method === 'GET') {
-      const data = await loadStaticData('categories');
+      const data = await Api.loadStaticData('categories');
       if (data && data.data) {
         return { success: true, categories: data.data };
       }
@@ -102,7 +125,7 @@ const Api = {
 
     // Products
     if (endpoint.startsWith('/products') && method === 'GET') {
-      const data = await loadStaticData('products');
+      const data = await Api.loadStaticData('products');
       if (!data) return null;
       const products = (data.data || []).map((product) => ({
         ...product,
@@ -158,7 +181,7 @@ const Api = {
 
     // Branches
     if (endpoint === '/branches' && method === 'GET') {
-      const data = await loadStaticData('branches');
+      const data = await Api.loadStaticData('branches');
       const branches = (data?.branches || data?.data || []).map((branch) => ({
         ...branch,
         average_rating: branch.average_rating ?? branch.rating ?? 0,
