@@ -214,10 +214,13 @@ function getProductImageSrc(product) {
     imageUrl === 'undefined' ||
     imageUrl === 'null' ||
     imageUrl.endsWith('/undefined') ||
-    imageUrl.endsWith('/null')
+    imageUrl.endsWith('/null') ||
+    (imageUrl.includes('cloudinary') && !imageUrl.startsWith('http'))
   ) {
     return getProductPlaceholderSrc(product);
   }
+  return imageUrl;
+}
   return imageUrl;
 }
 
