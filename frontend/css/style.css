@@ -358,10 +358,11 @@ input, select, textarea { font-family: inherit; }
 }
 .hero::before {
   content: '';
-  position: absolute; right: -60px; top: -60px;
-  width: 320px; height: 320px;
-  border-radius: 50%;
-  background: rgba(255,255,255,0.1);
+  position: absolute;
+  inset: 0;
+  background: url('../assets/groceries.jpg') center/cover no-repeat;
+  opacity: 0.2;
+  z-index: 0;
 }
 .hero::after {
   content: '';
