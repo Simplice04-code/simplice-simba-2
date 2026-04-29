@@ -1,0 +1,7 @@
+backend/node_modules/
+backend/.env
+backend/simba.db
+backend/simba.db-shm
+backend/simba.db-wal
+.DS_Store
+Thumbs.db

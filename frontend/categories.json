@@ -1,0 +1,15 @@
+{
+  "success": true,
+  "data": [
+    { "id": 1, "name": "Food Products", "icon": "🥫" },
+    { "id": 2, "name": "Alcoholic Drinks", "icon": "🍷" },
+    { "id": 3, "name": "Kitchenware & Electronics", "icon": "🍳" },
+    { "id": 4, "name": "Cosmetics & Personal Care", "icon": "💄" },
+    { "id": 5, "name": "Baby Products", "icon": "🧸" },
+    { "id": 6, "name": "Cleaning & Sanitary", "icon": "🧹" },
+    { "id": 7, "name": "Sports & Wellness", "icon": "⚽" },
+    { "id": 8, "name": "Pet Care", "icon": "🐾" },
+    { "id": 9, "name": "Kitchen Storage", "icon": "🫙" },
+    { "id": 10, "name": "General", "icon": "📦" }
+  ]
+}

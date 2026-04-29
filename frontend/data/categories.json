@@ -1,0 +1,65 @@
+﻿{
+    "success":  true,
+    "data":  [
+                 {
+                     "id":  1,
+                     "name":  "Cosmetics \u0026 Personal Care",
+                     "icon":  "💄",
+                     "product_count":  162
+                 },
+                 {
+                     "id":  2,
+                     "name":  "Sports \u0026 Wellness",
+                     "icon":  "⚽",
+                     "product_count":  1
+                 },
+                 {
+                     "id":  3,
+                     "name":  "Baby Products",
+                     "icon":  "🧸",
+                     "product_count":  25
+                 },
+                 {
+                     "id":  4,
+                     "name":  "Kitchenware \u0026 Electronics",
+                     "icon":  "🍳",
+                     "product_count":  62
+                 },
+                 {
+                     "id":  5,
+                     "name":  "Food Products",
+                     "icon":  "🥫",
+                     "product_count":  70
+                 },
+                 {
+                     "id":  6,
+                     "name":  "Alcoholic Drinks",
+                     "icon":  "🍷",
+                     "product_count":  251
+                 },
+                 {
+                     "id":  7,
+                     "name":  "General",
+                     "icon":  "📦",
+                     "product_count":  159
+                 },
+                 {
+                     "id":  8,
+                     "name":  "Cleaning \u0026 Sanitary",
+                     "icon":  "🧹",
+                     "product_count":  34
+                 },
+                 {
+                     "id":  9,
+                     "name":  "Kitchen Storage",
+                     "icon":  "🫙",
+                     "product_count":  9
+                 },
+                 {
+                     "id":  10,
+                     "name":  "Pet Care",
+                     "icon":  "🐾",
+                     "product_count":  16
+                 }
+             ]
+}
