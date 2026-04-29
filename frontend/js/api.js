@@ -75,11 +75,10 @@ const Api = {
       return window.SIMBA_STATIC_DATA[file];
     }
 
+    // Files are in same folder as index.html (frontend/)
     const paths = [
-      `data/${file}.json`,
-      `../frontend/data/${file}.json`,
-      `/frontend/data/${file}.json`,
-      `/data/${file}.json`
+      `${file}.json`,
+      `/${file}.json`
     ];
 
     for (const path of paths) {

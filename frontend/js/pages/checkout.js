@@ -19,12 +19,12 @@ const CheckoutPage = {
 
     const app = document.getElementById('app');
     app.innerHTML = `
-      <h1 style="font-size:1.5rem;font-weight:800;margin-bottom:24px">Simba 2.0 Pickup Checkout</h1>
+      <h1 style="font-size:1.5rem;font-weight:800;margin-bottom:24px">Simba 2.0 ${I18n.t('cart.checkout')}</h1>
       <div class="checkout-grid">
         <div>
           <div class="card">
-            <h3>1. Select Your Simba Branch</h3>
-            <p style="color:var(--text-2);margin-bottom:12px">Choose the Simba branch where you want to collect your order.</p>
+            <h3>1. ${I18n.t('selectBranch')}</h3>
+            <p style="color:var(--text-2);margin-bottom:12px">${I18n.t('selectBranch')}</p>
             <div id="branchMeta" style="font-size:0.85rem;color:var(--text-3);margin-bottom:12px">Loading branches...</div>
             <div id="branchSelectionGrid" class="category-grid">
               ${[1, 2, 3, 4].map(() => '<div class="skeleton" style="height:120px;border-radius:12px"></div>').join('')}
@@ -33,51 +33,51 @@ const CheckoutPage = {
           </div>
 
           <div class="card">
-            <h3>2. Pick a Time Slot</h3>
+            <h3>2. ${I18n.t('pickupTime')}</h3>
             <div id="pickupSlots" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px"></div>
           </div>
 
           <div class="card">
-            <h3>3. Confirm MoMo Deposit</h3>
+            <h3>3. ${I18n.t('paymentMethod')}</h3>
             <p style="color:var(--text-2);margin-bottom:16px">A non-refundable deposit is required before the branch prepares your order.</p>
             <div class="form-group">
-              <label>MTN MoMo Phone Number</label>
+              <label>MTN MoMo ${I18n.t('auth.phone')}</label>
               <input type="tel" id="momoPhone" placeholder="078XXXXXXX" />
             </div>
             <div class="delivery-estimate" id="depositInfo">
-              Deposit due: <strong id="depositAmountLabel">500 RWF</strong>
+              ${I18n.t('cart.total')}: <strong id="depositAmountLabel">500 RWF</strong>
             </div>
           </div>
 
           <button class="btn btn-primary btn-lg w-full" id="placeOrderBtn" onclick="CheckoutPage.placeOrder()">
-            Confirm Pickup Order
+            ${I18n.t('placeOrder')}
           </button>
         </div>
 
         <div>
           <div class="card" style="position:sticky;top:calc(var(--nav-h) + 80px)">
-            <h3>Order Summary</h3>
+            <h3>${I18n.t('cart.checkout')}</h3>
             <div class="order-summary-items" id="summaryItems"></div>
             <hr class="summary-divider" />
             <div class="summary-item">
-              <span class="summary-item-name">Branch</span>
-              <span class="summary-item-price" id="summaryBranch">Select one</span>
+              <span class="summary-item-name">${I18n.t('selectBranch')}</span>
+              <span class="summary-item-price" id="summaryBranch">${I18n.t('common.items')}</span>
             </div>
             <div class="summary-item">
-              <span class="summary-item-name">Pickup Slot</span>
-              <span class="summary-item-price" id="summarySlot">Select one</span>
+              <span class="summary-item-name">${I18n.t('pickupTime')}</span>
+              <span class="summary-item-price" id="summarySlot">${I18n.t('common.items')}</span>
             </div>
             <div class="summary-item">
-              <span class="summary-item-name">Basket Total</span>
+              <span class="summary-item-name">${I18n.t('cart.total')}</span>
               <span class="summary-item-price">${formatPrice(Cart.total)}</span>
             </div>
             <div class="summary-item">
-              <span class="summary-item-name">Deposit</span>
+              <span class="summary-item-name">${I18n.t('paymentMethod')}</span>
               <span class="summary-item-price" id="summaryDeposit">500 RWF</span>
             </div>
             <hr class="summary-divider" />
             <div class="summary-total">
-              <span>Total Today</span>
+              <span>${I18n.t('cart.total')}</span>
               <span class="summary-total-price" id="summaryToday">500 RWF</span>
             </div>
           </div>

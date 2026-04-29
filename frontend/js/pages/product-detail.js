@@ -26,7 +26,7 @@ const ProductDetailPage = {
 
     const res = await Api.getProduct(id);
     if (!res.ok) {
-      document.getElementById('detailContent').innerHTML = `<div class="empty-state"><span class="empty-icon">😞</span><h3>Product not found</h3><button class="btn btn-primary mt-4" onclick="App.navigate('products')">Browse Products</button></div>`;
+      document.getElementById('detailContent').innerHTML = `<div class="empty-state"><span class="empty-icon">😞</span><h3>${I18n.t('search.noResults')}</h3><button class="btn btn-primary mt-4" onclick="App.navigate('products')">${I18n.t('hero.shop')}</button></div>`;
       return;
     }
 
@@ -49,8 +49,8 @@ const ProductDetailPage = {
           <div class="detail-category">${p.category_name || ''}</div>
           <h1 class="detail-name">${p.name}</h1>
           <div class="detail-rating">
-            ${renderStars(p.avg_rating, p.review_count)}
-            <span style="font-size:0.82rem;color:var(--text-3)">${p.review_count} ${I18n.t('product.reviews')}</span>
+            ${renderStars(p.avg_rating || p.avg_rating || 0, p.review_count || 0)}
+            <span style="font-size:0.82rem;color:var(--text-3)">${(p.review_count || 0)} ${I18n.t('product.reviews')}</span>
           </div>
           <div class="detail-price">${formatPrice(p.price)}</div>
           <div class="detail-unit">per ${p.unit || 'Pcs'} · ${inStock ? `<span style="color:var(--success)">✅ ${I18n.t('product.inStock')}</span>` : `<span style="color:var(--error)">❌ ${I18n.t('product.outOfStock')}</span>`}</div>

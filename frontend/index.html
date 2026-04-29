@@ -28,7 +28,7 @@
       <div class="nav-search">
         <div class="search-wrapper">
           <span class="search-icon">🔍</span>
-          <input type="text" id="globalSearch" placeholder="Search products..." class="search-input" autocomplete="off" />
+          <input type="text" id="globalSearch" placeholder="Search products..." class="search-input" autocomplete="off" data-i18n-placeholder="searchPlaceholder" />
           <div class="search-suggestions" id="searchSuggestions"></div>
         </div>
       </div>
@@ -44,13 +44,13 @@
           🛒 <span class="cart-badge" id="cartBadge">0</span>
         </button>
         <div class="user-menu" id="userMenu">
-          <button class="btn btn-outline" data-route="login" id="loginBtn">Login</button>
+          <button class="btn btn-outline" data-route="login" id="loginBtn" data-i18n="login">Login</button>
           <div class="user-dropdown hidden" id="userDropdown">
             <button class="user-avatar" id="userAvatarBtn">👤 <span id="userNameNav"></span> ▾</button>
             <div class="dropdown-menu" id="dropdownMenu">
-              <a href="#" data-route="profile">👤 My Profile</a>
-              <a href="#" data-route="orders">📦 My Orders</a>
-              <a href="#" id="logoutBtn">🚪 Logout</a>
+              <a href="#" data-route="profile" data-i18n="profile">👤 My Profile</a>
+              <a href="#" data-route="orders" data-i18n="orders">📦 My Orders</a>
+              <a href="#" id="logoutBtn" data-i18n="logout">🚪 Logout</a>
             </div>
           </div>
         </div>
@@ -61,19 +61,19 @@
 
     <!-- Mobile nav -->
     <div class="mobile-nav hidden" id="mobileNav">
-      <input type="text" id="mobileSearch" placeholder="Search products..." class="search-input" />
-      <a href="#" data-route="home" class="mobile-link">🏠 Home</a>
-      <a href="#" data-route="products" class="mobile-link">🛍️ Products</a>
-      <a href="#" data-route="cart" class="mobile-link">🛒 Cart</a>
-      <a href="#" data-route="profile" class="mobile-link" id="mobileProfileLink">👤 Profile</a>
-      <a href="#" data-route="login" class="mobile-link" id="mobileLoginLink">🔑 Login</a>
+      <input type="text" id="mobileSearch" placeholder="Search products..." class="search-input" data-i18n-placeholder="searchPlaceholder" />
+      <a href="#" data-route="home" class="mobile-link" data-i18n="home">🏠 Home</a>
+      <a href="#" data-route="products" class="mobile-link" data-i18n="products">🛍️ Products</a>
+      <a href="#" data-route="cart" class="mobile-link" data-i18n="cart">🛒 Cart</a>
+      <a href="#" data-route="profile" class="mobile-link" id="mobileProfileLink" data-i18n="profile">👤 Profile</a>
+      <a href="#" data-route="login" class="mobile-link" id="mobileLoginLink" data-i18n="login">🔑 Login</a>
     </div>
   </header>
 
   <!-- ===== CATEGORY BAR ===== -->
   <div class="category-bar" id="categoryBar">
     <div class="category-bar-inner" id="categoryBarInner">
-      <button class="cat-pill active" data-category="">All Products</button>
+      <button class="cat-pill active" data-category="" data-i18n="allProducts">All Products</button>
     </div>
   </div>
 
@@ -120,7 +120,6 @@
   </div>
 
   <script src="js/i18n.js"></script>
-  <script src="data/static-data.js"></script>
   <script src="js/api.js"></script>
   <script src="js/cart.js"></script>
   <script src="js/pages/home.js"></script>

@@ -23,8 +23,8 @@ const ProductsPage = {
           <option value="rating">${I18n.t('filter.rating')}</option>
         </select>
         <select class="filter-select" id="stockFilter" onchange="ProductsPage.applyFilters()">
-          <option value="">All Stock</option>
-          <option value="true">In Stock Only</option>
+          <option value="">${I18n.t('filter.allStock')}</option>
+          <option value="true">${I18n.t('filter.inStockOnly')}</option>
         </select>
         <span class="results-count" id="resultsCount"></span>
       </div>
@@ -59,7 +59,7 @@ const ProductsPage = {
           </div>
         `;
       }
-      if (count) count.textContent = `${products.length} matched products`;
+      if (count) count.textContent = `${products.length} ${I18n.t('search.matches')}`;
       this.totalPages = 1;
       if (grid) {
         grid.innerHTML = products.length
@@ -92,7 +92,7 @@ const ProductsPage = {
 
     const { products, pagination } = res.data;
     this.totalPages = pagination.pages;
-    if (count) count.textContent = `${pagination.total} products`;
+    if (count) count.textContent = `${pagination.total} ${I18n.t('common.products')}`;
 
     if (!grid) return;
     if (products.length === 0) {
@@ -100,8 +100,8 @@ const ProductsPage = {
         <div class="empty-state" style="grid-column:1/-1">
           <span class="empty-icon">🔎</span>
           <h3>${I18n.t('search.noResults')}</h3>
-          <p>Try a different category or ask Simba AI a broader question.</p>
-          <button class="btn btn-primary mt-4" onclick="ProductsPage.render()">Clear Filters</button>
+          <p>${I18n.t('search.tryDifferent')}</p>
+          <button class="btn btn-primary mt-4" onclick="ProductsPage.render()">${I18n.t('filter.clear')}</button>
         </div>`;
       return;
     }

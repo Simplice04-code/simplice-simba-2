@@ -138,9 +138,10 @@ const AuthPage = {
     const email = window.prompt('Google account email for demo sign-in:');
     if (!email) return;
     const name = email.split('@')[0].replace(/[._-]+/g, ' ');
+    const capName = name.replace(/\b\w/g, (match) => match.toUpperCase());
     const res = await Api.googleLogin({
       email: email.trim(),
-      name: name.replace(/\b\w/g, (match) => match.toUpperCase()),
+      name: capName,
       google_token: `demo-google-${email.trim().toLowerCase()}`
     });
 
@@ -149,7 +150,7 @@ const AuthPage = {
       return;
     }
 
-    this.handleAuthSuccess(res.data, 'Signed in with Google.');
+    this.handleAuthSuccess(res.data, I18n.t('auth.login') + ' ' + I18n.t('success'));
   },
 
   async register() {

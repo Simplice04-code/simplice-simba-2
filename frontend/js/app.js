@@ -82,10 +82,10 @@ const App = {
     const bar = document.getElementById('categoryBarInner');
     if (!bar) return;
 
-    bar.innerHTML = `<button class="cat-pill active" data-category="" onclick="App.filterCategory('')">All Products</button>` +
+    bar.innerHTML = `<button class="cat-pill active" data-category="" onclick="App.filterCategory('')">${I18n.t('section.all')}</button>` +
       res.data.categories.map(c => `
         <button class="cat-pill" data-category="${c.name}" onclick="App.filterCategory('${encodeURIComponent(c.name)}')">
-          ${c.icon || '🛒'} ${c.name}
+          ${c.icon || '🛒'} ${I18n.tCategory(c.name)}
         </button>
       `).join('');
   },
@@ -187,7 +187,7 @@ const App = {
     Cart.items = []; Cart.total = 0; Cart.itemCount = 0;
     Cart.render(); Cart.updateBadge();
     this.updateNav();
-    Toast.show('Logged out successfully', 'info');
+    Toast.show(I18n.t('toast.loggedOut'), 'info');
     this.navigate('home');
   },
 

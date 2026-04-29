@@ -55,30 +55,30 @@ const HomePage = {
         </div>
         <div class="trust-item">
           <span class="trust-icon">📍</span>
-          <span>9 Branches in Kigali</span>
+          <span>${I18n.t('trust.branches')}</span>
         </div>
         <div class="trust-item">
           <span class="trust-icon">📦</span>
-          <span>789 Products</span>
+          <span>${I18n.t('trust.products')}</span>
         </div>
       </section>
 
       <!-- Promo Banners -->
       <div class="promo-banners">
         <div class="promo-banner promo-banner-1">
-          <div class="promo-tag">Offer</div>
-          <div class="promo-title">Free Delivery</div>
-          <div class="promo-sub">On orders over 100,000 RWF</div>
+          <div class="promo-tag">${I18n.t('promo.offer')}</div>
+          <div class="promo-title">${I18n.t('promo.freeDelivery')}</div>
+          <div class="promo-sub">${I18n.t('promo.freeDeliverySub')}</div>
         </div>
         <div class="promo-banner promo-banner-2">
-          <div class="promo-tag">New</div>
-          <div class="promo-title">Alcoholic Drinks</div>
-          <div class="promo-sub">Wide selection available</div>
+          <div class="promo-tag">${I18n.t('promo.new')}</div>
+          <div class="promo-title">${I18n.t('promo.alcoholic')}</div>
+          <div class="promo-sub">${I18n.t('promo.selection')}</div>
         </div>
         <div class="promo-banner promo-banner-3">
-          <div class="promo-tag">Fresh</div>
-          <div class="promo-title">Food Products</div>
-          <div class="promo-sub">Delivered to your doorstep</div>
+          <div class="promo-tag">${I18n.t('promo.fresh')}</div>
+          <div class="promo-title">${I18n.t('promo.food')}</div>
+          <div class="promo-sub">${I18n.t('promo.delivered')}</div>
         </div>
       </div>
 
@@ -147,8 +147,8 @@ const HomePage = {
     grid.innerHTML = cats.map(c => `
       <div class="category-card" onclick="App.navigate('products', {category:'${encodeURIComponent(c.name)}'})">
         <div class="cat-icon">${c.icon || '🛒'}</div>
-        <div class="cat-name">${c.name}</div>
-        <div class="cat-count">${c.product_count} items</div>
+        <div class="cat-name">${I18n.tCategory(c.name)}</div>
+        <div class="cat-count">${c.product_count} ${I18n.t('common.items')}</div>
       </div>
     `).join('');
   },
@@ -175,17 +175,17 @@ function renderProductCard(p) {
       <div class="product-img-wrap">
         <img src="${finalImageSrc}" alt="${p.name}" loading="lazy"
           onerror="setProductImageFallback(this)" />
-        ${!inStock ? '<div class="product-badge out-of-stock">Out of Stock</div>' : ''}
+        ${!inStock ? `<div class="product-badge out-of-stock">${I18n.t('product.outOfStock')}</div>` : ''}
         ${inStock ? `<div class="product-quick-add" onclick="event.stopPropagation();Cart.add(${p.id})">+ ${I18n.t('product.addCart')}</div>` : ''}
       </div>
       <div class="product-body">
-        <div class="product-category">${p.category_name || ''}</div>
+        <div class="product-category">${p.category_name ? tCategory(p.category_name) : ''}</div>
         <div class="product-name">${p.name}</div>
         <div class="product-rating">${renderStars(p.avg_rating || 0, p.review_count || 0)}</div>
         <div class="product-footer">
           <div>
             <div class="product-price">${formatPrice(p.price)}</div>
-            <div class="product-unit">per ${p.unit || 'Pcs'}</div>
+            <div class="product-unit">${I18n.t('common.per')} ${p.unit || 'Pcs'}</div>
           </div>
           ${inStock ? `<button class="add-btn" onclick="event.stopPropagation();Cart.add(${p.id})" title="${I18n.t('product.addCart')}">+</button>` : ''}
         </div>
